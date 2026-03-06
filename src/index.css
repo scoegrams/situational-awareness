@@ -2,27 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --crt-green: #00ff88;
-  --crt-green-dim: rgba(0, 255, 136, 0.65);
-  --crt-bg: #000;
+/* ─── DARK THEME (default) — phosphor green terminal ────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg:          #030d07;
+  --bg-panel:    #030d07;
+  --bg-hover:    rgba(0, 255, 136, 0.05);
+  --border:      rgba(0, 255, 136, 0.35);
+  --border-dim:  rgba(0, 255, 136, 0.18);
+  --accent:      #00ff88;
+  --accent-dim:  rgba(0, 255, 136, 0.65);
+  --accent-faint:rgba(0, 255, 136, 0.35);
+  --text:        #00ff88;
+  --text-muted:  rgba(0, 255, 136, 0.65);
+  --text-faint:  rgba(0, 255, 136, 0.40);
+  --text-dim:    rgba(0, 255, 136, 0.28);
+  --error:       rgba(255, 90, 90, 1);
+  --cursor-bg:   #00ff88;
+  --glow:        0 0 8px rgba(0,255,136,0.25), 0 0 1px rgba(0,255,136,0.55);
+  --graph-bg:    #000000;
+  --scanline-color: rgba(0, 255, 136, 0.025);
+  --scanline-opacity: 0.30;
+  --vignette: radial-gradient(ellipse at center,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.5) 100%);
+
+  /* ── Semantic status colors — dark ── */
+  --status-in:        #00ff88;
+  --status-in-text:   #000;
+  --status-in-glow:   rgba(0,255,136,0.4);
+  --status-watch:     #ffd700;
+  --status-watch-text:#000;
+  --status-watch-glow:rgba(255,215,0,0.4);
+  --status-out:       #ff4444;
+  --status-out-text:  #fff;
+  --status-put:       #ff5555;
+  --status-call:      #00ff88;
+  --status-fund-badge:#ffd700;
+  --status-fund-text: #000;
+  --chip-color:       #76b900;
+  --power-color:      #ffd700;
+  --compute-color:    #00e5ff;
+  --mining-color:     #ff9f43;
+  --era-fund-color:   #ffd700;
 }
 
-html,
-body {
+/* ─── LIGHT THEME — paper / newsprint ───────────────────────────────────── */
+[data-theme="light"] {
+  --bg:          #f5f0e8;
+  --bg-panel:    #ede8de;
+  --bg-hover:    rgba(0, 0, 0, 0.04);
+  --border:      rgba(0, 0, 0, 0.25);
+  --border-dim:  rgba(0, 0, 0, 0.12);
+  --accent:      #1a1a1a;
+  --accent-dim:  rgba(0, 0, 0, 0.60);
+  --accent-faint:rgba(0, 0, 0, 0.25);
+  --text:        #1a1a1a;
+  --text-muted:  rgba(0, 0, 0, 0.60);
+  --text-faint:  rgba(0, 0, 0, 0.40);
+  --text-dim:    rgba(0, 0, 0, 0.28);
+  --error:       #c0392b;
+  --cursor-bg:   #1a1a1a;
+  --glow:        none;
+  --graph-bg:    #ede8de;
+  --scanline-color: rgba(0, 0, 0, 0.04);
+  --scanline-opacity: 0.5;
+  --vignette: radial-gradient(ellipse at center,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,0.04) 70%, rgba(0,0,0,0.10) 100%);
+
+  /* ── Semantic status colors — light: darker, higher-contrast versions ── */
+  --status-in:        #1a7a4a;   /* dark forest green */
+  --status-in-text:   #fff;
+  --status-in-glow:   transparent;
+  --status-watch:     #b05e00;   /* dark burnt amber/rust */
+  --status-watch-text:#fff;
+  --status-watch-glow:transparent;
+  --status-out:       #b52b2b;   /* dark crimson */
+  --status-out-text:  #fff;
+  --status-put:       #b52b2b;   /* dark crimson */
+  --status-call:      #1a7a4a;   /* dark forest green */
+  --status-fund-badge:#7c3d00;   /* dark rust/sienna */
+  --status-fund-text: #fff;
+  --chip-color:       #3a6300;   /* dark olive */
+  --power-color:      #7c4a00;   /* dark amber */
+  --compute-color:    #005f7a;   /* dark teal */
+  --mining-color:     #7a3c00;   /* dark burnt orange */
+  --era-fund-color:   #7c3d00;   /* dark rust for "MAR 2026 FUND" button */
+}
+
+/* ─── BASE ───────────────────────────────────────────────────────────────── */
+html, body {
   height: 100%;
-  background: var(--crt-bg);
-  color: var(--crt-green);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+  transition: background 0.25s, color 0.25s;
 }
 
-/* Subtle glow */
-.crt-glow {
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.35), 0 0 2px rgba(0, 255, 136, 0.45);
-}
+/* ─── UTILITY CLASSES (theme-aware) ─────────────────────────────────────── */
+.t-bg        { background: var(--bg); }
+.t-bg-panel  { background: var(--bg-panel); }
+.t-border    { border-color: var(--border); }
+.t-border-dim{ border-color: var(--border-dim); }
+.t-text      { color: var(--text); }
+.t-muted     { color: var(--text-muted); }
+.t-faint     { color: var(--text-faint); }
+.t-dim       { color: var(--text-dim); }
+.t-accent    { color: var(--accent); }
+.t-error     { color: var(--error); }
+.t-hover:hover { background: var(--bg-hover); }
 
-/* Scanlines overlay */
+/* ─── GLOW ───────────────────────────────────────────────────────────────── */
+.crt-glow { text-shadow: var(--glow); }
+
+/* ─── SCANLINES ──────────────────────────────────────────────────────────── */
 .scanlines::before {
   content: "";
   pointer-events: none;
@@ -30,80 +124,82 @@ body {
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0, 255, 136, 0.05),
-    rgba(0, 255, 136, 0.05) 1px,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0) 4px
+    var(--scanline-color),
+    var(--scanline-color) 1px,
+    transparent 2px,
+    transparent 4px
   );
-  mix-blend-mode: screen;
-  opacity: 0.45;
+  mix-blend-mode: multiply;
+  opacity: var(--scanline-opacity);
   z-index: 40;
 }
-
-/* Vignette */
 .scanlines::after {
   content: "";
   pointer-events: none;
   position: fixed;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.35) 60%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: var(--vignette);
   z-index: 41;
 }
 
-/* CRT flicker */
+/* ─── FLICKER (dark only) ────────────────────────────────────────────────── */
 @keyframes flicker {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.98;
-  }
-  60% {
-    opacity: 0.99;
-  }
-  100% {
-    opacity: 1;
-  }
+  0%   { opacity: 1;    }
+  50%  { opacity: 0.98; }
+  60%  { opacity: 0.99; }
+  100% { opacity: 1;    }
 }
+[data-theme="dark"] .flicker { animation: flicker 3.6s infinite; }
+[data-theme="light"] .flicker { animation: none; }
 
-.flicker {
-  animation: flicker 3.6s infinite;
-}
+/* ─── CURVE ──────────────────────────────────────────────────────────────── */
+.curve { transform: perspective(900px) rotateX(0.5deg); }
+[data-theme="light"] .curve { transform: none; }
 
-/* Slight curvature illusion */
-.curve {
-  transform: perspective(900px) rotateX(0.6deg);
-}
-
-/* Blinking cursor */
+/* ─── BLINKING CURSOR ────────────────────────────────────────────────────── */
 @keyframes blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
-
 .cursor {
   display: inline-block;
   width: 10px;
   height: 1em;
-  background: var(--crt-green);
+  background: var(--cursor-bg);
   margin-left: 6px;
   transform: translateY(2px);
   animation: blink 1s infinite;
 }
 
-/* Fine-grain text smoothing */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ─── DRAGGABLE SETTINGS WINDOW ──────────────────────────────────────────── */
+.settings-window {
+  position: fixed;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  z-index: 1000;
+  min-width: 300px;
+  max-width: 360px;
+  user-select: none;
 }
+.settings-titlebar {
+  cursor: move;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-panel);
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-dim); }
+::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+/* ─── SMOOTH THEME TRANSITION ────────────────────────────────────────────── */
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+*, *::before, *::after { transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+/* Don't animate transforms or opacity transitions unintentionally */
+.cursor, .flicker { transition: none !important; }

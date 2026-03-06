@@ -2,14 +2,12 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 function kindClass(kind) {
   switch (kind) {
-    case 'system':
-      return 'text-[rgba(0,255,136,0.95)]'
-    case 'error':
-      return 'text-[rgba(255,80,80,0.95)]'
-    case 'input':
-      return 'text-[rgba(0,255,136,0.85)]'
-    default:
-      return 'text-[rgba(0,255,136,0.75)]'
+    case 'system':  return 't-accent font-bold tracking-wide'
+    case 'section': return 't-accent font-semibold mt-1'
+    case 'error':   return 't-error font-semibold'
+    case 'input':   return 't-accent'
+    case 'dim':     return 't-dim'
+    default:        return 't-text'
   }
 }
 
@@ -91,13 +89,13 @@ export default function Terminal({ lines, onCommand, onClear }) {
       className="h-[420px] md:h-[520px] flex flex-col"
       onMouseDown={() => inputRef.current?.focus()}
     >
-      <div className="px-4 py-3 border-b border-[rgba(0,255,136,0.25)] text-xs opacity-80">
-        TERMINAL · <span className="opacity-90">Ctrl+L</span> clear · ↑/↓ history
+      <div className="px-4 py-2.5 border-b t-border-dim text-xs t-muted font-semibold tracking-wider">
+        TERMINAL · <span className="t-text">Ctrl+L</span> clear · ↑/↓ history
       </div>
 
       <div
         ref={scrollRef}
-        className="flex-1 overflow-auto px-4 py-3 text-sm leading-relaxed"
+        className="flex-1 overflow-auto px-4 py-3 text-[13px] leading-[1.7]"
       >
         {lines.map((l, idx) => (
           <div key={idx} className={kindClass(l.kind)}>
@@ -113,7 +111,7 @@ export default function Terminal({ lines, onCommand, onClear }) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={onKeyDown}
-            className="flex-1 bg-transparent outline-none text-[rgba(0,255,136,0.95)] placeholder:text-[rgba(0,255,136,0.35)]"
+            className="flex-1 bg-transparent outline-none t-accent placeholder:t-dim"
             placeholder="type a command…"
             spellCheck={false}
             autoCapitalize="none"

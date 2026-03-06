@@ -1,138 +1,296 @@
-// A lightweight concept graph inspired by the "Situational Awareness" essay.
-// Keep this repo code-first: summaries + relationships.
-// If you add full text from external sources, consider licensing/copyright.
+// Concept graph based on Leopold Aschenbrenner's "Situational Awareness: The Decade Ahead" (2024)
+// Each node maps to a chapter/theme; chapter = essay slug for reference.
+
+export const CHAPTERS = {
+  I:    { label: 'I · Counting the OOMs',           url: 'https://situational-awareness.ai/from-gpt-4-to-agi/' },
+  II:   { label: 'II · Intelligence Explosion',      url: 'https://situational-awareness.ai/from-agi-to-superintelligence/' },
+  IIIa: { label: 'IIIa · Trillion-Dollar Cluster',  url: 'https://situational-awareness.ai/racing-to-the-trillion-dollar-cluster/' },
+  IIIb: { label: 'IIIb · Lock Down the Labs',       url: 'https://situational-awareness.ai/lock-down-the-labs/' },
+  IIIc: { label: 'IIIc · Superalignment',           url: 'https://situational-awareness.ai/superalignment/' },
+  IIId: { label: 'IIId · Free World Must Prevail',  url: 'https://situational-awareness.ai/the-free-world-must-prevail/' },
+  IV:   { label: 'IV · The Project',                url: 'https://situational-awareness.ai/the-project/' },
+}
 
 export const graph = {
   nodes: [
+    // ── Chapter I: Counting the OOMs ──────────────────────────────────────────
     {
-      id: 'ai_scaling_laws',
-      title: 'AI Scaling Laws',
+      id: 'scaling_laws',
+      title: 'Scaling Laws',
+      chapter: 'I',
       summary:
-        'Empirical relationships between compute/data/parameters and model capability. Suggests predictable gains from scaling.'
+        'Empirical power-law relationships show model capability improves predictably with more compute, data, and parameters. Every 10× (1 OOM) of effective compute yields a consistent, measurable jump in benchmark performance — the foundation of all timeline projections.',
+      keywords: ['OOM', 'compute', 'benchmarks', 'power law', 'trendlines'],
     },
     {
-      id: 'compute_scaling',
-      title: 'Compute Scaling',
+      id: 'oom_compute',
+      title: 'OOM: Physical Compute',
+      chapter: 'I',
       summary:
-        'The race to train frontier models is constrained by GPU availability, datacenters, capital, and energy.'
+        'Training compute has grown ~0.5 orders of magnitude per year — roughly doubling every 6 months through more GPUs and bigger clusters. From GPT-2 to GPT-4 represents ~4 OOMs of physical compute growth over 4 years.',
+      keywords: ['OOM', 'GPUs', 'training compute', '0.5 OOM/year'],
+    },
+    {
+      id: 'oom_algorithms',
+      title: 'OOM: Algorithmic Efficiency',
+      chapter: 'I',
+      summary:
+        'Algorithmic improvements (better architectures, training recipes, data curation) contribute another ~0.5 OOMs/year of "effective compute" without any extra hardware. This doubles the apparent rate of capability gain.',
+      keywords: ['algorithmic efficiency', 'architecture', 'training recipes', 'effective compute'],
+    },
+    {
+      id: 'unhobbling',
+      title: 'Unhobbling',
+      chapter: 'I',
+      summary:
+        'Models are artificially limited by default: they lack tools, memory, context, and agency. "Unhobbling" gains — RLHF, tool use, scaffolding, long context — unlock latent capability and transform chatbots into agents without any underlying model improvement.',
+      keywords: ['RLHF', 'tool use', 'agents', 'scaffolding', 'unhobbling'],
+    },
+    {
+      id: 'agi_by_2027',
+      title: 'AGI by 2027',
+      chapter: 'I',
+      summary:
+        'Projecting ~4 OOMs of total effective compute growth (physical + algorithmic + unhobbling) from GPT-4 to 2027 yields another GPT-2→GPT-4-sized qualitative jump. That could mean AI systems able to do the work of an AI researcher/engineer — the definition of AGI used here.',
+      keywords: ['AGI', '2027', 'projection', 'trendlines', 'researcher-level AI'],
+    },
+
+    // ── Chapter II: Intelligence Explosion ────────────────────────────────────
+    {
+      id: 'intelligence_explosion',
+      title: 'Intelligence Explosion',
+      chapter: 'II',
+      summary:
+        'Once AGI can automate AI research, each generation of AI accelerates the next. Hundreds of millions of AGI "coworkers" running experiments 24/7 could compress a decade of algorithmic progress into one year, producing rapidly superintelligent systems.',
+      keywords: ['feedback loop', 'recursive improvement', 'superintelligence', 'timelines'],
+    },
+    {
+      id: 'research_automation',
+      title: 'Automated AI Research',
+      chapter: 'II',
+      summary:
+        'AGI systems that can autonomously write code, run experiments, review papers, and iterate on model architectures would break the human-speed bottleneck on progress. This is the key input to the intelligence explosion — the moment AI starts improving itself at scale.',
+      keywords: ['autonomous research', 'coding agents', 'self-improvement'],
+    },
+    {
+      id: 'superintelligence',
+      title: 'Superintelligence',
+      chapter: 'II',
+      summary:
+        'Systems vastly smarter than any human in every relevant domain. Post-explosion, capability gains could be so rapid that we move from near-human to far-superhuman in months. The strategic, economic, and existential consequences are unparalleled.',
+      keywords: ['superintelligence', 'post-AGI', 'capability overhang'],
+    },
+
+    // ── Chapter IIIa: Trillion-Dollar Cluster ─────────────────────────────────
+    {
+      id: 'compute_scaling',
+      title: 'Compute Buildout',
+      chapter: 'IIIa',
+      summary:
+        'Training frontier models requires exponentially growing clusters. Projections point to $100B→$1T clusters by 2030. This demands extraordinary coordination: procuring GPUs at scale, building power infrastructure, and securing supply chains — mobilization not seen since WWII.',
+      keywords: ['GPU clusters', '$1T cluster', 'data centers', 'capital'],
+    },
+    {
+      id: 'energy_supply',
+      title: 'Energy & Power Grid',
+      chapter: 'IIIa',
+      summary:
+        'Data centers need electricity at a scale that strains national grids. US electricity production may need to grow 10–20% just for AI by 2030. Power contracts, nuclear restarts, and new gas plants are being secured years in advance.',
+      keywords: ['electricity', 'power grid', 'energy', 'nuclear', 'natural gas'],
     },
     {
       id: 'gpu_manufacturing',
       title: 'GPU Manufacturing',
+      chapter: 'IIIa',
       summary:
-        'Chip design + advanced manufacturing + packaging are a key bottleneck. Supply chains and export controls matter.'
-    },
-    {
-      id: 'datacenter_buildout',
-      title: 'Datacenter Buildout',
-      summary:
-        'Physical infrastructure required to house and power large GPU clusters: cooling, networking, construction timelines.'
-    },
-    {
-      id: 'energy_supply',
-      title: 'Energy Supply',
-      summary:
-        'Power generation and grid capacity become strategic constraints on scaling up training and inference.'
+        'Advanced chip manufacturing is concentrated in TSMC (Taiwan). GPU supply is the single biggest near-term bottleneck for scaling. US export controls attempt to limit China\'s access — a key vector in the geopolitical contest.',
+      keywords: ['TSMC', 'chip manufacturing', 'export controls', 'Nvidia', 'H100'],
     },
     {
       id: 'capital_allocation',
-      title: 'Capital Allocation',
+      title: 'Capital & Investment',
+      chapter: 'IIIa',
       summary:
-        'Training frontier models requires large up-front investment. Funding, incentives, and national priorities shape outcomes.'
+        'Training runs now cost hundreds of millions; the next generation will cost billions. Revenue from current models funds the next cluster. The scale of investment signals a winner-take-most dynamic: whoever builds the biggest cluster first gains a decisive lead.',
+      keywords: ['investment', 'funding', 'revenue', 'winner-take-most'],
+    },
+
+    // ── Chapter IIIb: Lock Down the Labs ──────────────────────────────────────
+    {
+      id: 'lab_security',
+      title: 'AI Lab Security',
+      chapter: 'IIIb',
+      summary:
+        'Current AI labs treat security as an afterthought. Model weights, training code, and alignment research are high-value targets. A state actor stealing frontier weights could short-circuit years of investment and bypass safety work — yet basic security hygiene is often absent.',
+      keywords: ['model weights', 'security', 'state actor', 'exfiltration', 'OpenAI', 'Anthropic'],
     },
     {
-      id: 'research_automation',
-      title: 'Automated Research',
+      id: 'espionage',
+      title: 'Espionage Threat',
+      chapter: 'IIIb',
       summary:
-        'AI systems that accelerate R&D: coding, experimentation, theorem-proving, chip design, and model improvement.'
+        'China\'s intelligence apparatus actively targets US AI labs. Insider threats, cyber intrusions, and supply-chain attacks are all vectors. The prize — frontier model weights and training recipes — would be transformative for any adversary who obtained them.',
+      keywords: ['China', 'CCP', 'insider threat', 'cyber attack', 'espionage'],
+    },
+
+    // ── Chapter IIIc: Superalignment ──────────────────────────────────────────
+    {
+      id: 'alignment_problem',
+      title: 'The Alignment Problem',
+      chapter: 'IIIc',
+      summary:
+        'We don\'t yet know how to reliably specify what we want a superhuman AI to do, nor how to verify that it\'s doing it. Misaligned goals in a superintelligent system could be catastrophic. This is an unsolved technical research problem — not a sci-fi thought experiment.',
+      keywords: ['alignment', 'corrigibility', 'reward hacking', 'specification', 'values'],
     },
     {
-      id: 'intelligence_explosion',
-      title: 'Intelligence Explosion',
+      id: 'superalignment',
+      title: 'Superalignment',
+      chapter: 'IIIc',
       summary:
-        'A feedback loop where better AI builds better AI, compressing timelines and accelerating capability improvements.'
+        'The challenge of aligning AI systems that are smarter than their creators. Classic alignment techniques (RLHF, red-teaming) may not scale to superhuman intelligence. New approaches — scalable oversight, interpretability, formal verification — are needed before the intelligence explosion.',
+      keywords: ['superalignment', 'scalable oversight', 'interpretability', 'RLHF', 'OpenAI'],
     },
     {
-      id: 'geopolitical_competition',
-      title: 'Geopolitical Competition',
+      id: 'interpretability',
+      title: 'Interpretability',
+      chapter: 'IIIc',
       summary:
-        'Strategic competition between states over AI capability, compute supply chains, and control of critical infrastructure.'
+        'Understanding what\'s happening inside neural networks — what circuits compute what, where values and beliefs are stored. Crucial for verifying alignment and detecting deceptive behavior. Current tools (attention visualization, probing) are primitive relative to the need.',
+      keywords: ['interpretability', 'mechanistic', 'circuits', 'transparency'],
+    },
+
+    // ── Chapter IIId: Free World Must Prevail ─────────────────────────────────
+    {
+      id: 'us_china_competition',
+      title: 'US–China AI Race',
+      chapter: 'IIId',
+      summary:
+        'The AI race is a geopolitical contest. The US currently leads, but China has scale, talent, and state-directed investment. A CCP-led superintelligence would give an autocratic regime decisive economic and military advantage over the free world — potentially permanently.',
+      keywords: ['China', 'CCP', 'US', 'geopolitics', 'competition', 'strategic advantage'],
     },
     {
-      id: 'us_ai_ecosystem',
-      title: 'US AI Ecosystem',
+      id: 'compute_governance',
+      title: 'Compute Governance',
+      chapter: 'IIId',
       summary:
-        'Private labs, cloud providers, chip firms, and universities. Strengths: innovation + capital + leading compute suppliers.'
+        'Controlling who can train frontier models means controlling compute: export controls on advanced chips, monitoring of large training runs, international agreements on compute thresholds. The most tractable lever for AI governance today.',
+      keywords: ['export controls', 'governance', 'compute', 'regulation', 'BIS'],
     },
     {
-      id: 'china_ai_ecosystem',
-      title: 'China AI Ecosystem',
+      id: 'democratic_ai',
+      title: 'Democratic AI Development',
+      chapter: 'IIId',
       summary:
-        'State-backed scale, talent, and manufacturing depth. Constraints can include access to top-end chips and tooling.'
+        'The case that democratic values — freedom of speech, rule of law, checks and balances — must be embedded in the development and deployment of superintelligence. An AI shaped by liberal democracies is far preferable to one shaped by authoritarian regimes.',
+      keywords: ['democracy', 'values', 'freedom', 'rule of law', 'liberal order'],
     },
+
+    // ── Chapter IV: The Project ────────────────────────────────────────────────
     {
-      id: 'security_and_espionage',
-      title: 'Security & Espionage',
+      id: 'the_project',
+      title: 'The Project',
+      chapter: 'IV',
       summary:
-        'Frontier weights, training recipes, and infrastructure are high-value targets. Security becomes core capability.'
-    },
-    {
-      id: 'alignment_risk',
-      title: 'Alignment Risk',
-      summary:
-        'If systems become extremely capable, misalignment or misuse can create catastrophic outcomes. Safety is not optional.'
+        'As AGI approaches, the US national security apparatus will get involved. A government-led AGI program — akin to the Manhattan Project — is likely by 2027–28. No private lab can handle the security, governance, and strategic implications of building superintelligence alone.',
+      keywords: ['Manhattan Project', 'NSA', 'government', 'classified', 'SCIF', 'national security'],
     },
     {
       id: 'governance',
-      title: 'Governance',
+      title: 'AI Governance',
+      chapter: 'IV',
       summary:
-        'Institutions, policy, norms, and enforcement mechanisms that shape AI deployment, security, and international stability.'
-    }
+        'Policies, institutions, and norms that shape AI development, deployment, and access. Includes domestic regulation, international coordination, liability frameworks, and safety standards. Critically under-developed relative to the speed of the technology.',
+      keywords: ['regulation', 'policy', 'international', 'norms', 'safety standards'],
+    },
   ],
+
   links: [
-    { source: 'compute_scaling', target: 'ai_scaling_laws', label: 'enables' },
-    { source: 'gpu_manufacturing', target: 'compute_scaling', label: 'bottleneck' },
-    { source: 'datacenter_buildout', target: 'compute_scaling', label: 'houses' },
-    { source: 'energy_supply', target: 'datacenter_buildout', label: 'powers' },
+    // OOM stack → AGI
+    { source: 'oom_compute',    target: 'scaling_laws',   label: 'grows' },
+    { source: 'oom_algorithms', target: 'scaling_laws',   label: 'multiplies' },
+    { source: 'unhobbling',     target: 'agi_by_2027',    label: 'accelerates' },
+    { source: 'scaling_laws',   target: 'agi_by_2027',    label: 'projects' },
+
+    // AGI → explosion
+    { source: 'agi_by_2027',           target: 'research_automation',  label: 'enables' },
+    { source: 'research_automation',   target: 'intelligence_explosion', label: 'drives' },
+    { source: 'intelligence_explosion', target: 'superintelligence',    label: 'produces' },
+
+    // Physical constraints
+    { source: 'gpu_manufacturing', target: 'compute_scaling',  label: 'bottleneck' },
+    { source: 'energy_supply',     target: 'compute_scaling',  label: 'powers' },
     { source: 'capital_allocation', target: 'compute_scaling', label: 'funds' },
+    { source: 'compute_scaling',   target: 'oom_compute',      label: 'feeds' },
 
-    { source: 'ai_scaling_laws', target: 'research_automation', label: 'improves' },
-    { source: 'research_automation', target: 'intelligence_explosion', label: 'drives' },
-    { source: 'compute_scaling', target: 'research_automation', label: 'trains' },
+    // Security
+    { source: 'espionage',   target: 'lab_security',  label: 'motivates' },
+    { source: 'lab_security', target: 'alignment_problem', label: 'protects' },
 
-    { source: 'geopolitical_competition', target: 'compute_scaling', label: 'pressures' },
-    { source: 'geopolitical_competition', target: 'gpu_manufacturing', label: 'contests' },
-    { source: 'geopolitical_competition', target: 'security_and_espionage', label: 'incentivizes' },
+    // Alignment stack
+    { source: 'intelligence_explosion', target: 'alignment_problem',  label: 'sharpens' },
+    { source: 'alignment_problem',      target: 'superalignment',     label: 'requires' },
+    { source: 'superalignment',         target: 'interpretability',   label: 'needs' },
 
-    { source: 'us_ai_ecosystem', target: 'compute_scaling', label: 'invests' },
-    { source: 'china_ai_ecosystem', target: 'compute_scaling', label: 'invests' },
-    { source: 'us_ai_ecosystem', target: 'geopolitical_competition', label: 'actor' },
-    { source: 'china_ai_ecosystem', target: 'geopolitical_competition', label: 'actor' },
+    // Geopolitics
+    { source: 'us_china_competition',  target: 'compute_scaling',      label: 'pressures' },
+    { source: 'us_china_competition',  target: 'gpu_manufacturing',    label: 'contests' },
+    { source: 'us_china_competition',  target: 'espionage',            label: 'incentivizes' },
+    { source: 'compute_governance',    target: 'us_china_competition', label: 'shapes' },
+    { source: 'compute_governance',    target: 'gpu_manufacturing',    label: 'regulates' },
+    { source: 'democratic_ai',         target: 'the_project',          label: 'motivates' },
 
-    { source: 'intelligence_explosion', target: 'alignment_risk', label: 'raises' },
-    { source: 'security_and_espionage', target: 'alignment_risk', label: 'amplifies' },
-    { source: 'governance', target: 'alignment_risk', label: 'mitigates' },
-    { source: 'governance', target: 'security_and_espionage', label: 'regulates' }
+    // The Project
+    { source: 'superintelligence',     target: 'the_project',    label: 'necessitates' },
+    { source: 'the_project',           target: 'governance',     label: 'instantiates' },
+    { source: 'governance',            target: 'alignment_problem', label: 'addresses' },
+    { source: 'governance',            target: 'lab_security',   label: 'mandates' },
   ]
 }
 
+// ── Timeline ──────────────────────────────────────────────────────────────────
 export const timelineLines = [
-  '2020  scaling laws validated in practice',
-  '2024  frontier LLMs demonstrate broad competence',
-  '2026  AI copilots accelerate engineering & research',
-  '2028  larger-scale research automation',
-  '2030  possibility: rapid capability takeoff'
+  '2019  GPT-2 · ~preschooler · semi-coherent paragraphs',
+  '2020  GPT-3 · ~elementary schooler · few-shot learning',
+  '2022  RLHF (InstructGPT) · chatbot era begins',
+  '2023  GPT-4 · ~smart high-schooler · aces college exams',
+  '2024  +4 OOMs effective compute since GPT-2',
+  '─────────────────────────────────────────────',
+  '2025  AI copilots become mainstream engineering tools',
+  '2026  ~+4 more OOMs projected · AGI-threshold plausible',
+  '2027  Researcher-level AI · self-improving feedback starts',
+  '2028  Automated AI research at scale · intelligence explosion',
+  '2030  Possible: rapid capability takeoff to superintelligence',
+  '─────────────────────────────────────────────',
+  'Source: Aschenbrenner (2024) · situational-awareness.ai',
 ]
 
+// ── Topology ASCII ─────────────────────────────────────────────────────────────
 export const mapAscii = String.raw`
-    [GPU_MANUFACTURING] -> [COMPUTE_SCALING] <- [DATACENTER_BUILDOUT]
-            |                    |                  ^
-            |                    v                  |
-     [GEO COMPETITION] -> [AI_SCALING_LAWS] -> [RESEARCH_AUTOMATION]
-            |                                       |
-            v                                       v
-   [SECURITY & ESPIONAGE]                      [INTELLIGENCE_EXPLOSION]
-            |                                       |
-            v                                       v
-         [GOVERNANCE]  ----------------------->  [ALIGNMENT_RISK]
+CAPABILITY STACK
+  [oom_compute] + [oom_algorithms] + [unhobbling]
+           \            |              /
+            └──> [scaling_laws] ──> [agi_by_2027]
+                                         |
+                              [research_automation]
+                                         |
+                            [intelligence_explosion]
+                                         |
+                              [superintelligence]
+                                         |
+                            ┌────────────┴────────────┐
+                      [alignment_problem]       [the_project]
+                            |                        |
+                     [superalignment]          [governance]
+                            |
+                    [interpretability]
+
+PHYSICAL LAYER
+  [gpu_manufacturing] → [compute_scaling] ← [energy_supply]
+                               ↑
+                       [capital_allocation]
+
+GEOPOLITICAL LAYER
+  [us_china_competition] → [espionage] → [lab_security]
+           ↑
+  [compute_governance]  [democratic_ai]
 `
